@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please cite the versioned software release used. This is pre-release metadata; update the version and add the Zenodo DOI after the release is archived."
+type: software
+title: "Deployability Access: The Paradox of Covert Consciousness — Supporting Computational Materials"
+version: 0.1.0
+repository-code: "https://github.com/dawooderahimi-md/MD.Rahimi"
+authors:
+  - family-names: Rahimi
+    given-names: Mohammad Dawood
+    affiliation: Freie Universität Berlin
+    orcid: "https://orcid.org/0000-0002-6282-1862"
+abstract: >-
+  Computational materials accompanying a conceptual Perspective on deployability
+  access and cognitive motor dissociation. The notebook and modeler-specified input
+  tables illustrate selected mathematical consequences and do not constitute an
+  empirical test of the framework or a model fitted to patient data.
+keywords:
+  - deployability access
+  - cognitive motor dissociation
+  - disorders of consciousness
+  - computational neuroscience
