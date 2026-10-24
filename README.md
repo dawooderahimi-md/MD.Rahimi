@@ -1,10 +1,14 @@
 # Deployability Access: The Paradox of Covert Consciousness
 
+[![DOI](https://zenodo.org/badge/1432590512.svg)](https://doi.org/10.5281/zenodo.23627986)
+
 **Author:** Mohammad Dawood Rahimi, Freie Universität Berlin  
 **ORCID:** [0000-0002-6282-1862](https://orcid.org/0000-0002-6282-1862)  
 **Contact:** MD.Rahimi@fu-berlin.de  
 **Repository:** https://github.com/dawooderahimi-md/MD.Rahimi  
-**Software DOI:** Add the version-specific DOI after archiving the first release on Zenodo.
+**Version:** `v1.0.0` (published 25 October 2026)  
+**Version-specific software DOI:** [10.5281/zenodo.23627987](https://doi.org/10.5281/zenodo.23627987)  
+**Concept DOI (all versions):** [10.5281/zenodo.23627986](https://doi.org/10.5281/zenodo.23627986)
 
 ## Purpose and scope
 
@@ -23,9 +27,9 @@ The notebook and both input tables currently sit in the repository root:
 | `TableS1b_tau_theta.csv` | Node-level relaxation-time and sigmoid-threshold parameters, together with the task-input fields included in the archived table. |
 | `README.md` | Project description, execution guidance, output inventory, and limitations. |
 | `ONLINE_RELEASE_CHECKLIST.md` | Release-preparation checklist; it is administrative documentation, not an input to the analysis. |
-| `CITATION.cff` | Recommended citation metadata; add it to the repository before creating a versioned release. |
+| `CITATION.cff` | Machine-readable software citation metadata for GitHub and future releases. |
 
-The notebook is intended to generate `DA_outputs/` and a downloadable `DA_outputs.zip` during execution. These are generated results, not input files. Include the generated outputs in the public release only after running the notebook successfully and checking the resulting files. Add `CITATION.cff` and the chosen licence file(s) before tagging a citable release. The current repository is public, but a versioned release and software DOI have not yet been created.
+The notebook generates `DA_outputs/` and a downloadable `DA_outputs.zip` during execution. These are generated results, not input files. Version `v1.0.0` has been archived on Zenodo. Changes made to the GitHub `main` branch after that release do not alter the files in the archived `v1.0.0` record; publish a new version if you need to archive changed code or files. The README and citation metadata on the current branch should nevertheless remain consistent with the published release and its DOI.
 
 ## Run the notebook in Google Colab
 
@@ -39,7 +43,7 @@ The notebook is intended to generate `DA_outputs/` and a downloadable `DA_output
 
 ## Run locally
 
-Use Python 3 with `numpy`, `scipy`, `pandas`, `matplotlib`, and `openpyxl`. Open `DA_complete_colab_perspective.ipynb` in Jupyter Notebook or JupyterLab and run the cells in order. Place both CSV files in the location expected by the notebook's input-loading cell, or use the built-in fallback if that is what the notebook reports. The notebook reads `DA_INPUT_DIR` if it is set; otherwise, it uses `/content/DA_inputs/` in Colab or `./DA_inputs/` in a local environment. The input loader reads the `tau`, `theta`, and `task_input` columns from `TableS1b_tau_theta.csv`, validates the seven-row node order, and uses the seven task-input values in the simulation. If the archived file is absent, the notebook uses the built-in defaults. The updated notebook has been executed end-to-end in a local Python environment with both production CSVs present; all 13 automated checks passed. This is not a substitute for rerunning the published commit in a clean Colab session before creating the versioned release. Inspect the input-source message, `Table2_parameters.csv`, and `MANIFEST.json` in that release run. The manifest records the Python and core package versions.
+Use Python 3 with `numpy`, `scipy`, `pandas`, `matplotlib`, and `openpyxl`. Open `DA_complete_colab_perspective.ipynb` in Jupyter Notebook or JupyterLab and run the cells in order. Place both CSV files in the location expected by the notebook's input-loading cell, or use the built-in fallback if that is what the notebook reports. The notebook reads `DA_INPUT_DIR` if it is set; otherwise, it uses `/content/DA_inputs/` in Colab or `./DA_inputs/` in a local environment. The input loader reads the `tau`, `theta`, and `task_input` columns from `TableS1b_tau_theta.csv`, validates the seven-row node order, and uses the seven task-input values in the simulation. If the archived file is absent, the notebook uses the built-in defaults. The updated notebook has been executed end-to-end in a local Python environment with both production CSVs present; all 13 automated checks passed. For independent reproduction, rerun the archived `v1.0.0` notebook in a clean Colab session and inspect the input-source message, `Table2_parameters.csv`, and `MANIFEST.json`. The manifest records the Python and core package versions. A successful local validation does not establish that every other environment will produce numerically identical outputs.
 
 For reproducible reporting, record the Python version, package versions, operating environment, notebook revision, selected input source, and random seeds used in the run. Do not describe results as independently reproduced until a fresh run has completed successfully.
 
@@ -57,15 +61,15 @@ The notebook specifies the following seeds for the principal simulation groups:
 
 The fixed seeds support reproducibility under the same code and compatible software environment. Exact numerical identity across different package versions, platforms, or modified notebooks should not be assumed without checking the outputs. Sensitivity analyses use matched stochastic paths where specified, and the step-size comparison uses matched Brownian increments. The local validation run recorded Python 3.13.5, NumPy 2.3.5, pandas 2.2.3, SciPy 1.17.0, Matplotlib 3.10.8, and openpyxl 3.1.5 in `MANIFEST.json`.
 
-## Verification before release
+## Verification and reproducibility
 
-After a complete run, inspect `DA_outputs/TableA_code_checks.csv`. The notebook reports 13 automated checks covering update rules, Brownian-increment coarsening, connectivity-matrix summaries, and selected headline results. In the local end-to-end validation completed on 2026-10-24 with both production CSV files present, all 13 checks passed. This validates the supplied notebook in that environment; it does not guarantee that a later edit or a different runtime will produce the same result. Rerun the exact public commit in a clean Colab session before publishing a versioned release. The connectivity checks for the archived matrix returned row sums `0.1` (sensory) and `1.3` (motor), spectral norm `1.3117`, and spectral radius `0.9015`.
+After a complete run, inspect `DA_outputs/TableA_code_checks.csv`. The notebook reports 13 automated checks covering update rules, Brownian-increment coarsening, connectivity-matrix summaries, and selected headline results. In the local end-to-end validation completed on 2026-10-24 with both production CSV files present, all 13 checks passed. This validates the supplied notebook in that environment; it does not guarantee that a later edit or a different runtime will produce the same result. For reproducibility, rerun the archived `v1.0.0` notebook in a clean Colab session. For any future release, rerun the exact release candidate before publishing it. The connectivity checks for the archived matrix returned row sums `0.1` (sensory) and `1.3` (motor), spectral norm `1.3117`, and spectral radius `0.9015`.
 
-Also inspect `Table2_parameters.csv` and `MANIFEST.json` to confirm which connectivity and node-parameter files the notebook loaded. Keep the manifest with the outputs. If a check fails or the recorded input source differs from the intended source, resolve that discrepancy before creating a citable release.
+Also inspect `Table2_parameters.csv` and `MANIFEST.json` to confirm which connectivity and node-parameter files the notebook loaded. Keep the manifest with the outputs. If a check fails or the recorded input source differs from the intended source, resolve that discrepancy before relying on the affected run or publishing a subsequent release.
 
 ## Output files and their locations in the article
 
-The following mapping describes the intended relationship between generated output files and the manuscript. Confirm the file inventory against a fresh `DA_outputs.zip` before release, because the actual contents depend on a successful notebook run.
+The following mapping describes the intended relationship between generated output files and the manuscript. Confirm the file inventory against the `DA_outputs.zip` produced by the run you report, because the actual contents depend on a successful notebook execution.
 
 | Output file | Intended article location or use |
 |---|---|
@@ -106,15 +110,21 @@ Spreadsheet software may reinterpret character strings such as `5-15` as dates w
 
 ## Citation
 
-The public source repository is available at https://github.com/dawooderahimi-md/MD.Rahimi. No versioned software release or DOI has been issued yet. After uploading the corrected notebook, rerunning the published commit in a clean Colab session, and checking the outputs, create a GitHub release and archive that version on Zenodo. Then replace this paragraph with the version-specific software citation and DOI supplied by Zenodo. Cite the associated manuscript separately using its final publication details; do not list a journal, publication year, volume, or page range before those details are confirmed.
+Cite the specific archived version used in the analysis. The version-specific DOI identifies `v1.0.0`; the concept DOI resolves to the latest version in this software record.
 
-**Suggested software citation format after the first release:**  
-Rahimi, M. D. (2026). *Deployability Access: The Paradox of Covert Consciousness — Supporting Computational Materials* (Version 1.0.0) [Computer software]. Zenodo. [Insert the version-specific DOI issued by Zenodo].
+**Version-specific citation (recommended when citing this release):**  
+Rahimi, M. D. (2026). *Deployability Access: The Paradox of Covert Consciousness — Supporting Computational Materials* (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23627987
+
+**Version-specific DOI:** https://doi.org/10.5281/zenodo.23627987  
+**Concept DOI (all versions):** https://doi.org/10.5281/zenodo.23627986  
+**GitHub repository:** https://github.com/dawooderahimi-md/MD.Rahimi
+
+The DOI badge at the top of this README links to the concept DOI so that readers can find the latest version. Use the version-specific DOI in a manuscript when reproducibility requires identification of the exact archived release. Cite the associated article separately using its final publication details; the software citation does not imply that the accompanying Perspective has been published.
 
 ## Licensing
 
-Resolve licensing before the public release. A practical arrangement is to license the notebook/code under the MIT License and original tables and figures under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), using separate licence files and clearly identifying which materials each covers. This is a recommendation, not a licence already granted. Do not leave alternative licence choices or ambiguous licensing terms in the published repository.
+The published Zenodo record for version `v1.0.0` currently identifies the archived software package as **Creative Commons Attribution 4.0 International (CC BY 4.0)**. This is the licence shown in the versioned record. Do not describe the notebook as MIT-licensed unless a separate, explicit code licence is added and the licensing scope is made clear. If you intend to apply different licences to code and data/figures, add suitable licence files and clearly state which materials each covers; archive that change in a subsequent version if it changes the materials or licensing terms represented by the Zenodo record.
 
 ## Release history
 
-- **Pre-release working repository:** Public source files are online. The revised notebook now loads all seven task-input values from the parameter CSV and validates the input tables. A local end-to-end run using both production CSVs passed all 13 automated checks. Version 1.0.0 remains planned; first upload the revised notebook and documentation, rerun the published commit in a clean Colab session, inspect outputs, and select licences.
+- **`v1.0.0` — published 25 October 2026.** Archived on Zenodo as *Deployability Access: The Paradox of Covert Consciousness — Supporting Computational Materials*. Version DOI: [10.5281/zenodo.23627987](https://doi.org/10.5281/zenodo.23627987). Concept DOI for all versions: [10.5281/zenodo.23627986](https://doi.org/10.5281/zenodo.23627986). The archived materials include the GitHub release snapshot and its input tables. The notebook's computations use modeler-specified parameters and are illustrative, not fitted to patient data.
