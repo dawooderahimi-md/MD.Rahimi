@@ -1,0 +1,8 @@
+,source Frontal,source Parietal,source Sensory,source ACC,source Thalamus,source Striatum,source Motor
+target Frontal,0.0,0.5,0.0,0.2,0.4,0.0,0.0
+target Parietal,0.5,0.0,0.3,0.0,0.3,0.0,0.0
+target Sensory,0.0,0.1,0.0,0.0,0.0,0.0,0.0
+target ACC,0.7,0.5,0.0,0.0,0.0,0.0,0.0
+target Thalamus,0.3,0.2,0.0,0.1,0.0,0.0,0.0
+target Striatum,0.4,0.0,0.0,0.0,0.4,0.0,0.0
+target Motor,0.5,0.2,0.0,0.0,0.0,0.6,0.0

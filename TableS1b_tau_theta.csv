@@ -1,0 +1,8 @@
+node,tau_i (s),theta_i,task_input
+Frontal,0.8,1.0,2.5
+Parietal,0.8,1.0,2.0
+Sensory,0.8,1.0,0.0
+ACC,0.8,1.0,0.0
+Thalamus,0.8,1.0,0.0
+Striatum,0.8,1.0,0.0
+Motor,0.8,1.0,0.0
