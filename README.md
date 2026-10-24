@@ -31,15 +31,15 @@ The notebook is intended to generate `DA_outputs/` and a downloadable `DA_output
 
 1. Upload the notebook and the two CSV files to a public GitHub repository, or open the notebook directly in Google Colab after uploading it there.
 2. Open `DA_complete_colab_perspective.ipynb` in Colab.
-3. When you want the notebook to read the archived input files rather than its built-in defaults, upload both CSV files to `/content/DA_inputs/`, using their exact filenames. The current project notes state that the notebook falls back to built-in matrix and parameter values when the archived CSV files are unavailable. Verify that behavior in a clean run, and check the input-source message printed by the notebook so the run records which source it actually used.
+3. The first code cell checks for the two expected CSVs in `/content/DA_inputs/` (or the folder set by `DA_INPUT_DIR`). If either file is missing in Colab, the cell opens a single upload dialog for the missing input(s). Upload `TableS1a_connectivity_W.csv` and `TableS1b_tau_theta.csv` with their exact filenames. The setup cell validates the matrix labels, node order, dimensions, and the `tau`, `theta`, and `task_input` columns.
 4. Select **Runtime → Run all**. Runtime depends on the Colab session, package versions, and hardware; no fixed execution time is guaranteed.
-5. When execution finishes, inspect the code-check table and the manifest. Download `DA_outputs.zip` from the session if you want to archive the generated outputs separately from the notebook.
+5. Inspect `DA_outputs/TableA_code_checks.csv`, `Table2_parameters.csv`, and `MANIFEST.json`. Confirm that all 13 checks pass, that the intended production files were loaded, and that the figures and tables exist. Download `DA_outputs.zip` before closing or resetting the session.
 
 **Important:** Google Colab runtimes are temporary. Download any generated files that you want to preserve before closing or resetting the session.
 
 ## Run locally
 
-Use Python 3 with `numpy`, `scipy`, `pandas`, `matplotlib`, and `openpyxl`. Open `DA_complete_colab_perspective.ipynb` in Jupyter Notebook or JupyterLab and run the cells in order. Place both CSV files in the location expected by the notebook's input-loading cell, or use the built-in fallback if that is what the notebook reports. The notebook reads `DA_INPUT_DIR` if it is set; otherwise, it uses `/content/DA_inputs/` in Colab or `./DA_inputs/` in a local environment. The current input loader reads the `tau` and `theta` columns in `TableS1b_tau_theta.csv`, but it does not currently read that table’s `task_input` column; task-input amplitudes remain defined in the notebook defaults. We have identified this as a pre-release consistency issue and should resolve it before assigning a final release version.
+Use Python 3 with `numpy`, `scipy`, `pandas`, `matplotlib`, and `openpyxl`. Open `DA_complete_colab_perspective.ipynb` in Jupyter Notebook or JupyterLab and run the cells in order. Place both CSV files in the location expected by the notebook's input-loading cell, or use the built-in fallback if that is what the notebook reports. The notebook reads `DA_INPUT_DIR` if it is set; otherwise, it uses `/content/DA_inputs/` in Colab or `./DA_inputs/` in a local environment. The input loader reads the `tau`, `theta`, and `task_input` columns from `TableS1b_tau_theta.csv`, validates the seven-row node order, and uses the seven task-input values in the simulation. If the archived file is absent, the notebook uses the built-in defaults. The updated notebook has been executed end-to-end in a local Python environment with both production CSVs present; all 13 automated checks passed. This is not a substitute for rerunning the published commit in a clean Colab session before creating the versioned release. Inspect the input-source message, `Table2_parameters.csv`, and `MANIFEST.json` in that release run. The manifest records the Python and core package versions.
 
 For reproducible reporting, record the Python version, package versions, operating environment, notebook revision, selected input source, and random seeds used in the run. Do not describe results as independently reproduced until a fresh run has completed successfully.
 
@@ -55,11 +55,11 @@ The notebook specifies the following seeds for the principal simulation groups:
 | Reduced-model signature analyses | `3` |
 | Duty-cycle demonstrations | `7` |
 
-The fixed seeds support reproducibility under the same code and compatible software environment. Exact numerical identity across different package versions, platforms, or modified notebooks should not be assumed without checking the outputs. Sensitivity analyses use matched stochastic paths where specified, and the step-size comparison uses matched Brownian increments.
+The fixed seeds support reproducibility under the same code and compatible software environment. Exact numerical identity across different package versions, platforms, or modified notebooks should not be assumed without checking the outputs. Sensitivity analyses use matched stochastic paths where specified, and the step-size comparison uses matched Brownian increments. The local validation run recorded Python 3.13.5, NumPy 2.3.5, pandas 2.2.3, SciPy 1.17.0, Matplotlib 3.10.8, and openpyxl 3.1.5 in `MANIFEST.json`.
 
 ## Verification before release
 
-After a complete run, inspect `DA_outputs/TableA_code_checks.csv`. The notebook is designed to report 13 automated checks covering update rules, Brownian-increment coarsening, connectivity-matrix summaries, and selected headline results. Verify that every check has the expected successful status before publishing a release; do not rely on this description as proof that the current copy has passed. The connectivity checks reported for the archived matrix are row sums from `0.1` to `1.3`, spectral norm `1.3117`, and spectral radius `0.9015`.
+After a complete run, inspect `DA_outputs/TableA_code_checks.csv`. The notebook reports 13 automated checks covering update rules, Brownian-increment coarsening, connectivity-matrix summaries, and selected headline results. In the local end-to-end validation completed on 2026-10-24 with both production CSV files present, all 13 checks passed. This validates the supplied notebook in that environment; it does not guarantee that a later edit or a different runtime will produce the same result. Rerun the exact public commit in a clean Colab session before publishing a versioned release. The connectivity checks for the archived matrix returned row sums `0.1` (sensory) and `1.3` (motor), spectral norm `1.3117`, and spectral radius `0.9015`.
 
 Also inspect `Table2_parameters.csv` and `MANIFEST.json` to confirm which connectivity and node-parameter files the notebook loaded. Keep the manifest with the outputs. If a check fails or the recorded input source differs from the intended source, resolve that discrepancy before creating a citable release.
 
@@ -106,7 +106,7 @@ Spreadsheet software may reinterpret character strings such as `5-15` as dates w
 
 ## Citation
 
-The public source repository is available at https://github.com/dawooderahimi-md/MD.Rahimi. No versioned software release or DOI has been issued yet. After correcting the input-loader issue, rerunning the notebook, and checking the outputs, create a GitHub release and archive that version on Zenodo. Then replace this paragraph with the version-specific software citation and DOI supplied by Zenodo. Cite the associated manuscript separately using its final publication details; do not list a journal, publication year, volume, or page range before those details are confirmed.
+The public source repository is available at https://github.com/dawooderahimi-md/MD.Rahimi. No versioned software release or DOI has been issued yet. After uploading the corrected notebook, rerunning the published commit in a clean Colab session, and checking the outputs, create a GitHub release and archive that version on Zenodo. Then replace this paragraph with the version-specific software citation and DOI supplied by Zenodo. Cite the associated manuscript separately using its final publication details; do not list a journal, publication year, volume, or page range before those details are confirmed.
 
 **Suggested software citation format after the first release:**  
 Rahimi, M. D. (2026). *Deployability Access: The Paradox of Covert Consciousness — Supporting Computational Materials* (Version 1.0.0) [Computer software]. Zenodo. [Insert the version-specific DOI issued by Zenodo].
@@ -117,4 +117,4 @@ Resolve licensing before the public release. A practical arrangement is to licen
 
 ## Release history
 
-- **Pre-release working repository:** Public source files are online. Version 1.0.0 remains planned; create that release only after resolving the documented input-loader issue, completing a clean run, checking outputs, and selecting licences.
+- **Pre-release working repository:** Public source files are online. The revised notebook now loads all seven task-input values from the parameter CSV and validates the input tables. A local end-to-end run using both production CSVs passed all 13 automated checks. Version 1.0.0 remains planned; first upload the revised notebook and documentation, rerun the published commit in a clean Colab session, inspect outputs, and select licences.
